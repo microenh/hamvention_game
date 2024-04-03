@@ -1,0 +1,3 @@
+/.mypy_cache/
+/.venv/
+/screens/__pycache__/
