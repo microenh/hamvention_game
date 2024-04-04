@@ -6,6 +6,9 @@ from screens.level_base import LevelBase
 from screens.start import Start
 from screens.end import End
 from screens.full_map import FullMap
+from screens.maxim import Maxim
+from screens.marconi import Marconi
+from screens.tesla import Tesla
 
 SCREEN_SIZE = (640, 480)
 
@@ -18,6 +21,9 @@ class Main:
         'start': Start,
         'end'  : End,
         'full_map': FullMap,
+        'maxim' : Maxim,
+        'marconi': Marconi,
+        'tesla': Tesla,
     }
     
     def __init__(self) -> None:
