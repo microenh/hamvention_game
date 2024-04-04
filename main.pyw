@@ -9,8 +9,22 @@ from screens.full_map import FullMap
 from screens.maxim import Maxim
 from screens.marconi import Marconi
 from screens.tesla import Tesla
+from screens.tickets import Tickets
+from screens.forum1 import Forum1
+from screens.forum2 import Forum2
+from screens.forum3 import Forum3
+from screens.forum4 import Forum4
+from screens.forum5 import Forum5
+from screens.tent import Tent
+from screens.hertz import Hertz
+from screens.volta import Volta
+from screens.campers import Campers
+from screens.testing import Testing
+from screens.emcomm import Emcomm
+from screens.flea_market import FleaMarket
+from screens.food import Food
 
-SCREEN_SIZE = (640, 480)
+SCREEN_SIZE = (800, 600)
 
 fps_color: pygame.Color = pygame.Color('gray60')
 fps_border_color: pygame.Color = pygame.Color('gray30')
@@ -24,6 +38,20 @@ class Main:
         'maxim' : Maxim,
         'marconi': Marconi,
         'tesla': Tesla,
+        'tickets': Tickets,
+        'forum1': Forum1,
+        'forum2': Forum2,
+        'forum3': Forum3,
+        'forum4': Forum4,
+        'forum5': Forum5,
+        'tent': Tent,
+        'hertz': Hertz,
+        'volta': Volta,
+        'campers': Campers,
+        'testing': Testing,
+        'emcomm': Emcomm,
+        'flea_market': FleaMarket,
+        'food': Food,
     }
     
     def __init__(self) -> None:

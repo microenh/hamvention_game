@@ -6,7 +6,7 @@ from .level_base import LevelBase
 end_color = pygame.Color('darkred')
 text_color = pygame.Color('red')
 
-class Tesla(LevelBase):
+class Forum4(LevelBase):
 
     def __init__(self, rect: pygame.Rect,
                        set_next : Callable[[Optional[str]], None]) -> None:
@@ -22,7 +22,7 @@ class Tesla(LevelBase):
             self.local = surface.copy()
             self.local.fill(end_color)
             font = pygame.font.Font(None, 96)
-            text_surf = font.render('Tesla', True, text_color)
+            text_surf = font.render('Forum 4', True, text_color)
             text_rect = text_surf.get_rect(center = self.rect.center)
             self.local.blit(text_surf, text_rect)
             font = pygame.font.Font(None, 32)
