@@ -1,5 +1,5 @@
 import pygame
-from typing import List
+from typing import List, Annotated
 
 TILE_SIZE = 32
 MOVEMENT = TILE_SIZE // 4
@@ -14,4 +14,4 @@ area_title_color: pygame.Color = pygame.Color('lightgreen')
 bg_color: pygame.Color = pygame.Color('gray80')
 
 
-saved_position: list[int, int] = [0, 0]
+saved_position: Annotated[list[int], 2] = [0, 0]
