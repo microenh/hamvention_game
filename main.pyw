@@ -5,17 +5,19 @@ from typing import Optional, Type
 from screens.level_base import LevelBase
 from screens.start import Start
 from screens.end import End
+from screens.full_map import FullMap
 
 SCREEN_SIZE = (640, 480)
 
 fps_color: pygame.Color = pygame.Color('gray60')
 fps_border_color: pygame.Color = pygame.Color('gray30')
-transition_color: pygame.Color = pygame.Color('cyan')
+transition_color: pygame.Color = pygame.Color('gray40')
 
 class Main:
     screens: dict[str, Type[LevelBase]] = {
         'start': Start,
-        'end'  : End, 
+        'end'  : End,
+        'full_map': FullMap,
     }
     
     def __init__(self) -> None:
@@ -50,7 +52,7 @@ class Main:
         self.fps_rect: pygame.Rect = self.fps_surf.get_rect(center=self.fps_border_rect.center)
         self.fps_timer: int = pygame.event.custom_type()
 
-        self.set_next('start')
+        self.set_next('full_map')
         
         pygame.time.set_timer(self.fps_timer, 1000)
         

@@ -34,7 +34,7 @@ class Start(LevelBase):
 
     def event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
-            self.set_next('end')
+            self.set_next('full_map')
         
     def update(self) -> None:
         if self.start_delay:
