@@ -3,7 +3,8 @@ import pygame
 from typing import Optional, Type
 
 from screens.setup import (SCREEN_SIZE, fps_color, fps_border_color,
-                           transition_color, fps_font, transparent)
+                           transition_color, fps_font, transparent,
+                           MAX_TRANSITION)
 from screens.level_base import LevelBase
 from screens.start import Start
 from screens.end import End
@@ -62,7 +63,7 @@ class Main:
         self.display: pygame.Surface = pygame.Surface(SCREEN_SIZE)
         self.display_transition: pygame.Surface = pygame.Surface(SCREEN_SIZE)
 
-        self.transition: int = 60     # 0 open, 60 closed
+        self.transition: int = MAX_TRANSITION     # 0 open, 60 closed
         self.transition_vel: int = -1 # 1 close, -1 open, 0 n/c
 
         self.controller: LevelBase = LevelBase(self.screen_rect, self.set_next)
@@ -120,7 +121,7 @@ class Main:
             self.transition += self.transition_vel
             if self.transition <= 0:
                 self.transition_vel = 0
-            if self.transition >= 60:
+            if self.transition >= MAX_TRANSITION:
                 self.transition_vel = -1
                 if self.next_controller:
                     self.controller = self.next_controller
@@ -134,11 +135,11 @@ class Main:
         if self.transition_vel:
             transition_surf = self.display.copy()
             transition_surf.fill(transition_color)
-            pygame.draw.circle(transition_surf, (c := (255,255,255)),
+            pygame.draw.circle(transition_surf, transparent,
                 (transition_surf.get_width() // 2,
                  transition_surf.get_height() // 2),
-                 (60 - self.transition) * 8)
-            transition_surf.set_colorkey(c)
+                 (MAX_TRANSITION - self.transition) * 16)
+            transition_surf.set_colorkey(transparent)
             self.display_transition.blit(transition_surf, (0,0))
             
         self.display_transition.blit(self.fps_border_surf,

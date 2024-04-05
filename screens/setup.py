@@ -3,10 +3,12 @@ from typing import List, Annotated
 
 pygame.font.init()
 
-SCREEN_SIZE = (800, 600)
+SCREEN_SIZE = (1024,768)
 TILE_SIZE = 32
 MOVEMENT = TILE_SIZE // 4
 MARGIN = TILE_SIZE * 2
+MAX_TRANSITION = SCREEN_SIZE[1] // 16
+MAX_MAP = (1680, 960)
 
 transparent: pygame.Color = pygame.Color(0,0,0)
 wall_color: pygame.Color = pygame.Color('brown')
@@ -39,7 +41,7 @@ notyet_font = pygame.font.Font(None, 96)
 notyet_press_font = pygame.font.Font(None, 32)
 
 
-fps_font: pygame.font.Font = pygame.font.Font(None, 16)
+fps_font: pygame.font.Font = pygame.font.Font(None, SCREEN_SIZE[1] // 32)
 fps_color: pygame.Color = pygame.Color('gray60')
 fps_border_color: pygame.Color = pygame.Color('gray30')
 

@@ -6,7 +6,7 @@ from .area import Area
 from .level_base import LevelBase
 from .setup import (bg_color, MARGIN, MOVEMENT, saved_position, TILE_SIZE,
                     transparent, fps_font, fps_color, fps_border_color,
-                    SCREEN_SIZE)
+                    SCREEN_SIZE, MAX_MAP)
 
 class FullMap(LevelBase):
     def __init__(self, rect: pygame.Rect,
@@ -14,27 +14,27 @@ class FullMap(LevelBase):
         super().__init__(rect, set_next)
 
         self.buildings: Tuple[Building, ...] = (
-            Building(15,  4, 5, 5, (), (1,), (), (2,), 'Maxim', 'maxim'),
-            Building(22,  4, 5, 5, (1,), (1,), (), (3,), 'Tesla', 'tesla'),
-            Building(29,  4, 5, 5, (1,), (), (), (2,), 'Marconi', 'marconi'),
-            Building(36,  5, 4, 3, (1,), (), (), (), 'Forum 4', 'forum4'),
-            Building( 5, 15, 8, 4, (1,), (1,), (), (), 'Tent', 'tent'),
-            Building(15, 13, 3, 4, (2,), (), (), (), 'Forum 1', 'forum1'),
-            Building(15, 17, 3, 4, (1,), (), (), (), 'Forum 2', 'forum2'),
-            Building(21, 15, 3, 4, (1,), (), (), (), 'Forum 3', 'forum3'),
-            Building(26, 15, 3, 4, (), (1,), (1,), (1,), 'Hertz', 'hertz'),
-            Building(31, 13, 3, 6, (2,), (2,), (1,), (1,), 'Volta', 'volta'),
+            Building(17,  6, 5, 5, (), (1,), (), (2,), 'Maxim', 'maxim'),
+            Building(24,  6, 5, 5, (1,), (1,), (), (3,), 'Tesla', 'tesla'),
+            Building(31,  6, 5, 5, (1,), (), (), (2,), 'Marconi', 'marconi'),
+            Building(38,  7, 4, 3, (1,), (), (), (), 'Forum 4', 'forum4'),
+            Building( 7, 17, 8, 4, (1,), (1,), (), (), 'Tent', 'tent'),
+            Building(17, 15, 3, 4, (2,), (), (), (), 'Forum 1', 'forum1'),
+            Building(17, 19, 3, 4, (1,), (), (), (), 'Forum 2', 'forum2'),
+            Building(23, 17, 3, 4, (1,), (), (), (), 'Forum 3', 'forum3'),
+            Building(28, 17, 3, 4, (), (1,), (1,), (1,), 'Hertz', 'hertz'),
+            Building(33, 15, 3, 6, (2,), (2,), (1,), (1,), 'Volta', 'volta'),
         )
 
         self.areas: Tuple[Area, ...] = (
-            Area(15,  0, 25,  2, 'Campers', 'campers'),
-            Area( 0,  5,  3,  2, 'Tickets', 'tickets'),
-            Area( 0, 24,  3,  2, 'Testing', 'testing'),
-            Area( 5, 11,  4,  2, 'Forum 5', 'forum5'),
-            Area( 9, 11,  4,  2, 'Emcomm', 'emcomm'),
-            Area(20, 11,  9,  2, 'Food', 'food'),
-            Area(42,  4,  6, 22, 'Flea Market', 'flea_market'),
-            Area(15, 24, 25,  2, 'Flea Market', 'flea_market'),
+            Area(17,  2, 25,  2, 'Campers', 'campers'),
+            Area( 2,  7,  3,  2, 'Tickets', 'tickets'),
+            Area( 2, 26,  3,  2, 'Testing', 'testing'),
+            Area( 7, 13,  4,  2, 'Forum 5', 'forum5'),
+            Area(11, 13,  4,  2, 'Emcomm', 'emcomm'),
+            Area(22, 13,  9,  2, 'Food', 'food'),
+            Area(44,  6,  6, 22, 'Flea Market', 'flea_market'),
+            Area(17, 26, 25,  2, 'Flea Market', 'flea_market'),
         )
 
         self.ham_surf: pygame.Surface = (
@@ -123,7 +123,15 @@ class FullMap(LevelBase):
                     saved_position[1] = i.rect.y - TILE_SIZE
                     self.set_next(i.dest)
                     
-            if update:        
+            if update:
+                if r.right > MAX_MAP[0]:
+                    r.right = MAX_MAP[0]
+                elif r.left < 0:
+                    r.left = 0
+                if r.top < 0:
+                    r.top = 0
+                elif r.bottom > MAX_MAP[1]:
+                    r.bottom = MAX_MAP[1]
                 self.ham_rect = r
         self.xy_surf = fps_font.render(f'{self.ham_rect.x}, {self.ham_rect.y}', True, fps_color)
         self.xy_rect = self.xy_surf.get_rect(center=self.xy_border_rect.center)
