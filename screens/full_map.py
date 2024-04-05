@@ -12,27 +12,27 @@ class FullMap(LevelBase):
         super().__init__(rect, set_next)
 
         self.buildings: Tuple[Building, ...] = (
-            Building(16,  4, 5, 5, (), (1,), (), (2,), 'Maxim', 'maxim'),
-            Building(23,  4, 5, 5, (1,), (1,), (), (3,), 'Tesla', 'tesla'),
-            Building(30,  4, 5, 5, (1,), (), (), (2,), 'Marconi', 'marconi'),
-            Building(38,  5, 4, 3, (1,), (), (), (), 'Forum 4', 'forum4'),
-            Building( 4, 15, 7, 3, (1,), (1,), (), (), 'Tent', 'tent'),
-            Building(16, 13, 3, 4, (2,), (), (), (), 'Forum 1', 'forum1'),
-            Building(16, 17, 3, 4, (1,), (), (), (), 'Forum 2', 'forum2'),
-            Building(22, 15, 3, 4, (1,), (), (), (), 'Forum 3', 'forum3'),
-            Building(27, 15, 3, 4, (), (1,), (1,), (1,), 'Hertz', 'hertz'),
-            Building(32, 13, 3, 6, (2,), (2,), (1,), (1,), 'Volta', 'volta'),
+            Building(15,  4, 5, 5, (), (1,), (), (2,), 'Maxim', 'maxim'),
+            Building(22,  4, 5, 5, (1,), (1,), (), (3,), 'Tesla', 'tesla'),
+            Building(29,  4, 5, 5, (1,), (), (), (2,), 'Marconi', 'marconi'),
+            Building(36,  5, 4, 3, (1,), (), (), (), 'Forum 4', 'forum4'),
+            Building( 5, 15, 8, 4, (1,), (1,), (), (), 'Tent', 'tent'),
+            Building(15, 13, 3, 4, (2,), (), (), (), 'Forum 1', 'forum1'),
+            Building(15, 17, 3, 4, (1,), (), (), (), 'Forum 2', 'forum2'),
+            Building(21, 15, 3, 4, (1,), (), (), (), 'Forum 3', 'forum3'),
+            Building(26, 15, 3, 4, (), (1,), (1,), (1,), 'Hertz', 'hertz'),
+            Building(31, 13, 3, 6, (2,), (2,), (1,), (1,), 'Volta', 'volta'),
         )
 
         self.areas: Tuple[Area, ...] = (
-            Area(16,  0, 26,  2, 'Campers', 'campers'),
+            Area(15,  0, 25,  2, 'Campers', 'campers'),
             Area( 0,  5,  3,  2, 'Tickets', 'tickets'),
-            Area( 0, 23,  3,  2, 'Testing', 'testing'),
-            Area( 4, 11,  4,  2, 'Forum 5', 'forum5'),
-            Area( 8, 11,  4,  2, 'Emcomm', 'emcomm'),
-            Area(16, 24, 26,  2, 'Flea Market', 'flea_market'),
-            Area(23, 10,  5,  2, 'Food', 'food'),
-            Area(44,  4,  6, 22, 'Flea Market', 'flea_market'),
+            Area( 0, 24,  3,  2, 'Testing', 'testing'),
+            Area( 5, 11,  4,  2, 'Forum 5', 'forum5'),
+            Area( 9, 11,  4,  2, 'Emcomm', 'emcomm'),
+            Area(20, 11,  9,  2, 'Food', 'food'),
+            Area(42,  4,  6, 22, 'Flea Market', 'flea_market'),
+            Area(15, 24, 25,  2, 'Flea Market', 'flea_market'),
         )
 
         self.ham_surf: pygame.Surface = (
@@ -118,7 +118,7 @@ class FullMap(LevelBase):
             self.offset_x += sr.left + MARGIN - r.left
         elif r.right > sr.right - MARGIN:
             self.offset_x += sr.right - MARGIN - r.right
-        if r.top < sr.top + 20:
+        if r.top < sr.top + MARGIN:
             self.offset_y += sr.top + MARGIN - r.top
         elif r.bottom > sr.bottom - MARGIN:
             self.offset_y += sr.bottom - MARGIN - r.bottom

@@ -2,10 +2,8 @@ from typing import Callable, Optional
 import pygame
 
 from .level_base import LevelBase
-
-bg_color: pygame.Color = pygame.Color('silver')
-title_color: pygame.Color = pygame.Color('linen')
-press_color: pygame.Color = pygame.Color('gold')
+from .setup import (splash_color, splash_title_color, splash_press_color,
+                    splash_font, splash_press_font)
 
 class Start(LevelBase):
     def __init__(self, rect: pygame.Rect,
@@ -20,15 +18,13 @@ class Start(LevelBase):
         self.animate: bool = True
         self.start_delay: int = 20
 
-        font: pygame.font.Font = pygame.font.Font(None, 100)
-        self.hv_surf: pygame.Surface = font.render('Hamvention®', True, title_color)
+        self.hv_surf: pygame.Surface = splash_font.render('Hamvention®', True, splash_title_color)
         self.hv_rect: pygame.Rect = self.hv_surf.get_rect(centerx = rect.centerx,
                                              top = 50)
-        self.tg_surf: pygame.Surface = font.render('the game', True, title_color)
+        self.tg_surf: pygame.Surface = splash_font.render('the game', True, splash_title_color)
         self.tg_rect: pygame.Rect = self.tg_surf.get_rect(centerx = rect.centerx,
                                              bottom = rect.bottom - 50)
-        font = pygame.font.Font(None, 32)
-        self.pa_surf: pygame.Surface = font.render('Press any key', True, press_color)
+        self.pa_surf: pygame.Surface = splash_press_font.render('Press any key', True, splash_press_color)
         self.pa_rect: pygame.Rect = self.pa_surf.get_rect(centerx = rect.centerx,
                                              bottom = rect.bottom - 20)
 
@@ -62,7 +58,7 @@ class Start(LevelBase):
                 surface.blit(self.pa_surf, self.pa_rect)
                 self.animate = False
             else:
-                surface.fill(bg_color)
+                surface.fill(splash_color)
                 rotated_logo = pygame.transform.rotate(self.logo, self.rotation)
                 rotated_logo_rect = rotated_logo.get_rect(center=self.logo_rect.center)
                 surface.blit(rotated_logo, rotated_logo_rect)

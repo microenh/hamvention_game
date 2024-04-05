@@ -2,6 +2,8 @@ import pygame
 
 from typing import Optional, Type
 
+from screens.setup import (SCREEN_SIZE, fps_color, fps_border_color,
+                           transition_color, fps_font)
 from screens.level_base import LevelBase
 from screens.start import Start
 from screens.end import End
@@ -24,11 +26,6 @@ from screens.emcomm import Emcomm
 from screens.flea_market import FleaMarket
 from screens.food import Food
 
-SCREEN_SIZE = (800, 600)
-
-fps_color: pygame.Color = pygame.Color('gray60')
-fps_border_color: pygame.Color = pygame.Color('gray30')
-transition_color: pygame.Color = pygame.Color('gray40')
 
 class Main:
     screens: dict[str, Type[LevelBase]] = {
@@ -69,8 +66,7 @@ class Main:
         self.next_controller: LevelBase | None = None
 
         self.fps: int = 0
-        self.fps_font: pygame.font.Font = pygame.font.Font(None, 16)
-        fps_size: tuple[int, int] = self.fps_font.size('00')
+        fps_size: tuple[int, int] = fps_font.size('00')
         self.fps_border_surf: pygame.Surface = pygame.Surface((fps_size[0] + 20,
                                               fps_size[1] + 4))
         self.fps_border_surf.set_colorkey((0,0,0))
@@ -82,11 +78,11 @@ class Main:
         self.fps_border_rect.right = SCREEN_SIZE[0] - 4
         self.fps_border_rect.bottom = SCREEN_SIZE[1] - 4
 
-        self.fps_surf: pygame.Surface = self.fps_font.render('', True, fps_color)
+        self.fps_surf: pygame.Surface = fps_font.render('', True, fps_color)
         self.fps_rect: pygame.Rect = self.fps_surf.get_rect(center=self.fps_border_rect.center)
         self.fps_timer: int = pygame.event.custom_type()
 
-        self.set_next('full_map')
+        self.set_next('start')
         
         pygame.time.set_timer(self.fps_timer, 1000)
         
@@ -100,7 +96,7 @@ class Main:
         self.transition_vel = 1
 
     def update_fps(self) -> None:
-        self.fps_surf = self.fps_font.render(f'{self.fps:2}', True, fps_color)
+        self.fps_surf = fps_font.render(f'{self.fps:2}', True, fps_color)
         self.fps_rect = self.fps_surf.get_rect(center=self.fps_border_rect.center)
         self.fps = 0
         
