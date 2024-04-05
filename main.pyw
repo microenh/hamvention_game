@@ -56,6 +56,9 @@ class Main:
         pygame.display.set_caption('Hamvention® the game')
         self.screen: pygame.Surface = pygame.display.set_mode(SCREEN_SIZE)
         self.screen_rect: pygame.Rect = self.screen.get_rect()
+        logo: pygame.Surface = pygame.image.load('graphics/logo_small.png').convert_alpha()
+        pygame.display.set_icon(logo)
+
         self.display: pygame.Surface = pygame.Surface(SCREEN_SIZE)
         self.display_transition: pygame.Surface = pygame.Surface(SCREEN_SIZE)
 
