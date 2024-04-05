@@ -3,7 +3,7 @@ import pygame
 from typing import Optional, Type
 
 from screens.setup import (SCREEN_SIZE, fps_color, fps_border_color,
-                           transition_color, fps_font)
+                           transition_color, fps_font, transparent)
 from screens.level_base import LevelBase
 from screens.start import Start
 from screens.end import End
@@ -69,12 +69,12 @@ class Main:
         fps_size: tuple[int, int] = fps_font.size('00')
         self.fps_border_surf: pygame.Surface = pygame.Surface((fps_size[0] + 20,
                                               fps_size[1] + 4))
-        self.fps_border_surf.set_colorkey((0,0,0))
+        self.fps_border_surf.set_colorkey(transparent)
+        self.fps_border_rect: pygame.Rect = self.fps_border_surf.get_rect()
         pygame.draw.rect(self.fps_border_surf,
                          fps_border_color,
-                         self.fps_border_surf.get_rect(),
+                         self.fps_border_rect,
                          border_radius=8)
-        self.fps_border_rect: pygame.Rect = self.fps_border_surf.get_rect()
         self.fps_border_rect.right = SCREEN_SIZE[0] - 4
         self.fps_border_rect.bottom = SCREEN_SIZE[1] - 4
 

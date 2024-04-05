@@ -8,7 +8,7 @@ TILE_SIZE = 32
 MOVEMENT = TILE_SIZE // 4
 MARGIN = TILE_SIZE * 2
 
-transparent: pygame.Color = pygame.Color(255,255,255)
+transparent: pygame.Color = pygame.Color(0,0,0)
 wall_color: pygame.Color = pygame.Color('brown')
 building_color: pygame.Color = pygame.Color('gray90')
 building_title_color: pygame.Color = pygame.Color('red')

@@ -14,7 +14,7 @@ class End(LevelBase):
    
     def event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN:
-            self.set_next('full_map' if event.key == pygame.K_r else None)
+            self.set_next('start' if event.key == pygame.K_r else None)
     
     def render(self, surface: pygame.Surface) -> None:
         if self.local is None:

@@ -4,7 +4,9 @@ import pygame
 from .building import Building
 from .area import Area
 from .level_base import LevelBase
-from .setup import bg_color, MARGIN, MOVEMENT, saved_position, TILE_SIZE
+from .setup import (bg_color, MARGIN, MOVEMENT, saved_position, TILE_SIZE,
+                    transparent, fps_font, fps_color, fps_border_color,
+                    SCREEN_SIZE)
 
 class FullMap(LevelBase):
     def __init__(self, rect: pygame.Rect,
@@ -46,6 +48,21 @@ class FullMap(LevelBase):
 
         self.vel_offset_x = self.vel_offset_y = 0
         self.offset_x = self.offset_y = 0
+
+        xy_size = fps_font.size('00000,00000')
+        self.xy_border_surf: pygame.Surface = pygame.Surface((xy_size[0] + 20,
+                                                              xy_size[1] + 4))
+        self.xy_border_rect: pygame.Rect = self.xy_border_surf.get_rect()
+        pygame.draw.rect(self.xy_border_surf,
+                         fps_border_color,
+                         self.xy_border_rect,
+                         border_radius=8)
+        self.xy_border_rect.left = 4
+        self.xy_border_rect.bottom = SCREEN_SIZE[1] - 4
+        
+        self.xy_border_surf.set_colorkey(transparent)
+        self.xy_surf: pygame.Surface = fps_font.render('', True, fps_color)
+        self.xy_rect: pygame.Rect = self.xy_surf.get_rect(center = self.xy_border_rect.center)
 
     def event(self, event: pygame.event.Event) -> None:
         match event.type:
@@ -108,6 +125,8 @@ class FullMap(LevelBase):
                     
             if update:        
                 self.ham_rect = r
+        self.xy_surf = fps_font.render(f'{self.ham_rect.x}, {self.ham_rect.y}', True, fps_color)
+        self.xy_rect = self.xy_surf.get_rect(center=self.xy_border_rect.center)
 
             
     def render(self, surface: pygame.Surface) -> None:
@@ -128,7 +147,11 @@ class FullMap(LevelBase):
             i.render(surface, self.offset_x, self.offset_y)
         for j in self.areas:
             j.render(surface, self.offset_x, self.offset_y)
-            
+
+
+        surface.blit(self.xy_border_surf, self.xy_border_rect)
+        surface.blit(self.xy_surf, self.xy_rect)            
+
         surface.blit(self.ham_surf, r)
         
             
